@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,8 +18,9 @@ class AuthController extends Controller
     public function registerSubmit(Request $request)
     {
         $request->validate([
+            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
         ],
 
         // error messages
@@ -28,19 +30,18 @@ class AuthController extends Controller
             'email.unique' => 'Email já está em uso',
             'password.required' => 'Senha é obrigatória',
             'password.min' => 'Senha deve ter pelo menos 8 caracteres',
-            'password.confirmed' => 'Confirmação de senha não corresponde',
+            
         ]
     );
 
-        $user = User::create([
+        User::create([
+            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::login($user);
-        $request->session()->regenerate();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('login')->with('success', 'Conta criada com sucesso! Faça login.');
     }
 
     public function showLogin()
@@ -60,17 +61,33 @@ class AuthController extends Controller
             'email.required' => 'Email é obrigatório',
             'email.email' => 'Email inválido',
             'password.required' => 'Senha é obrigatória',
+            'password.string' => 'Senha inválida',
         ]
     );
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            return redirect()->route('dashboard');
         }
 
-        return back()->withErrors([
-            'email' => 'E-mail ou senha inválidos.',
-        ])->onlyInput('email');
+        return back()->with('error', 
+            'E-mail ou senha inválidos.',
+        )->onlyInput('email');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
+    }
+
+    public function dashboard()
+    {
+        return view('dashboard');
     }
 }

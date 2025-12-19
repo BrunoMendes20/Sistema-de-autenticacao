@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Models;
-Use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+
+class User extends Authenticatable
 {
     // User model code here
+    protected $fillable = ['name', 'email', 'password', 'google_id'];
 }   

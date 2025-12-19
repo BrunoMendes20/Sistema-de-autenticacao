@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Route;
 // auth routes - user not logged in
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+    Route::post('/registerSubmit', [AuthController::class, 'registerSubmit'])->name('register.submit');
 
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+    Route::post('/loginSubmit', [AuthController::class, 'loginSubmit'])->name('login.submit');
 });
 
 // auth routes - user logged in

@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'google' => [
+        'client_id' => env('Google_Client_ID'),
+        'client_secret' => env('Google_Client_Secret'),
+        'redirect' => env('Google_Redirect_URI'),
+    ],
+
 ];

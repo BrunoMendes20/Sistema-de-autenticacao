@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GoogleAuthController;
 use Illuminate\Support\Facades\Route;
 
 // auth routes - user not logged in
@@ -10,6 +11,10 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/loginSubmit', [AuthController::class, 'loginSubmit'])->name('login.submit');
+
+    Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('google.login');    
+    Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('google.callback');
+
 });
 
 // auth routes - user logged in

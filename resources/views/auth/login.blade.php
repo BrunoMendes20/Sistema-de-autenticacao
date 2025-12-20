@@ -27,7 +27,7 @@
             </div>
 
             @error('email')
-                <div class=" alert alert-danger d-block fade show auto-close">
+                <div class="alert alert-danger d-block fade show auto-close">
                     {{ $message }}
                 </div>
                 
@@ -45,12 +45,24 @@
                 </div>
                 
             @enderror
+
             <button type="submit" class="btn w-100">Entrar</button>
         </form>
-
+        
         <x-slot:footer>
             Não tem uma conta? <a href="{{route('register')}}">Cadastre-se</a>
         </x-slot:footer>
+
+        <x-slot:orText>
+            <span class="mx-2 text-muted">OU</span>
+        </x-slot:orText>
+
+        <x-slot:authButton>
+
+            <a href="{{ route('google.login') }}" class="btn btn-google">
+                <i class="fa-brands fa-google"></i> 
+            </a>
+        </x-slot:authButton>
     </x-auth-card>
 @endsection
 

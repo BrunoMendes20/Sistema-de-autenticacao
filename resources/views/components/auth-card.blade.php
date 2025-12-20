@@ -13,6 +13,17 @@
                             {{ $footer }}
                         </p>
 
+                        <div class="d-flex align-items-center my-4">
+                            <hr class="flex-grow-1">
+                            {{ $orText }}
+                            <hr class="flex-grow-1">
+
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                          {{ $authButton}}
+                        </div>
+
                     </div>
 
                 </div>

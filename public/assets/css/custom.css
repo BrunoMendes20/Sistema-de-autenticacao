@@ -53,3 +53,36 @@ a {
     text-decoration: none;
     color: #0dcaf0;
 }
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #6c757d;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.divider:not(:empty)::before {
+    margin-right: 10px;
+}
+
+.divider:not(:empty)::after {
+    margin-left: 10px;
+}
+
+.btn-google {
+   color: #fff;
+   border-radius: 50%;
+}
+
+i:hover {
+    color: rgb(208, 53, 53);
+
+}

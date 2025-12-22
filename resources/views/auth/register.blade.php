@@ -2,7 +2,7 @@
 
 @section('content') 
     <x-auth-card>
-        <form action="/registerSubmit" method="POST" novalidate>
+        <form action="{{ route('register.submit') }}" method="POST" novalidate>
             @csrf
 
             

@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('google_token')->nullable();
-            $table->string('google_refresh_token')->nullable();
+            //
         });
     }
 
@@ -22,8 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
-         Schema::table('users', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn(['google_token', 'google_refresh_token']);
         });
     }

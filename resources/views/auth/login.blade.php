@@ -19,11 +19,9 @@
                 
             @endif
 
-          
-
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email"  value="{{ old('email') }}" required>
+                <input type="email" class="form-control"  name="email"  value="{{ old('email') }}" required>
             </div>
 
             @error('email')
@@ -36,7 +34,11 @@
 
             <div class="mb-3">
                 <label for="password" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control"  name="password" required>
+            </div>
+
+            <div>
+
             </div>
 
             @error('password')
@@ -46,23 +48,32 @@
                 
             @enderror
 
-            <button type="submit" class="btn w-100">Entrar</button>
-        </form>
-        
-        <x-slot:footer>
-            Não tem uma conta? <a href="{{route('register')}}">Cadastre-se</a>
-        </x-slot:footer>
+            <x-slot:rememberMe>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{ old('rememberMe') }}" name="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Lembrar-me</label>
+                  </div>
+            </x-slot:rememberMe>
 
-        <x-slot:orText>
+            <button type="submit" class="btn mt-3 w-100">Entrar</button>
+        </form>
+
+
+        <x-slot:divider>
             <span class="mx-2 text-muted">OU</span>
-        </x-slot:orText>
+        </x-slot:divider>
 
         <x-slot:authButton>
-
+            
+            <p>Entre com</p>
             <a href="{{ route('google.login') }}" class="btn btn-google">
                 <i class="fa-brands fa-google"></i> 
             </a>
         </x-slot:authButton>
+
+        <x-slot:footer>
+            Não tem uma conta ? <a href="{{route('register')}}">Cadastre-se</a>
+        </x-slot:footer>
     </x-auth-card>
 @endsection
 

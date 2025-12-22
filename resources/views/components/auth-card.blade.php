@@ -9,11 +9,6 @@
                         
                         {{ $slot ?? null }}
 
-                        
-                        <div class="text-start mt-3">
-                            {{$rememberMe ?? null}}
-                            
-                        </div>
 
                         @if (isset($divider))
                        

@@ -2,7 +2,7 @@
 
 @section('content') 
     <x-auth-card>
-        <form action="/loginSubmit" method="POST" novalidate>
+        <form action="{{ route('login.submit') }}" method="POST" novalidate>
             @csrf
 
             @if (session('error'))
@@ -48,12 +48,20 @@
                 
             @enderror
 
-            <x-slot:rememberMe>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="{{ old('rememberMe') }}" name="rememberMe">
-                    <label class="form-check-label" for="rememberMe">Lembrar-me</label>
-                  </div>
-            </x-slot:rememberMe>
+         
+            <div class="form-check mb-3">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="remember"
+                    name="remember"
+                    value="1"
+                    {{ old('remember') ? 'checked' : '' }}
+                >
+                <label class="form-check-label" for="remember"> Lembrar-me</label>
+            </div>
+    
+
 
             <button type="submit" class="btn mt-3 w-100">Entrar</button>
         </form>

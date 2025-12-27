@@ -19,19 +19,25 @@ class AuthController extends Controller
     {
         $request->validate([
 
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'password_confirmation' => 'required|string|same:password',
+            'name' => 'required|min:3|max:30|unique:users,name',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|max:32|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
+            'password_confirmation' => 'required|same:password',
         ],
 
         // error messages
         [
+            'name.required' => 'O nome é obrigatório',
+            'name.min' => 'O nome deve ter pelo :min caracteres',
+            'name.max' => 'O nome deve ter pelo :max caracteres',
+            'name.unique' => 'Esse nome não pode ser usado',
             'email.required' => 'Email é obrigatório',
             'email.email' => 'Email inválido',
             'email.unique' => 'Email já está em uso',
             'password.required' => 'Senha é obrigatória',
-            'password.min' => 'Senha deve ter pelo menos 8 caracteres',
+            'password.min' => 'Senha deve ter pelo menos :min caracteres',
+            'password.max' => 'Senha deve ter no máximo :max  caracteres',
+            'password.regex' => 'A senha deve conter pelo menos uma letra maiúscula, uma minúscula e um número.',
             'password_confirmation.required' => 'Confirmação de senha é obrigatória',
             'password_confirmation.same' => 'As senhas não coincidem',
             

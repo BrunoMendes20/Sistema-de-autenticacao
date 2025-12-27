@@ -1,4 +1,4 @@
-@extends('layouts.main_layout', ['pageTitle' => 'Login'])
+@extends('layouts.app-layout', ['pageTitle' => 'Login'])
 
 @section('content') 
     <x-auth-card>
@@ -25,7 +25,7 @@
             </div>
 
             @error('email')
-                <div class="alert alert-danger d-block fade show auto-close">
+                <div class="invalid-feedback d-block fade show auto-close">
                     {{ $message }}
                 </div>
                 
@@ -37,31 +37,22 @@
                 <input type="password" class="form-control"  name="password" required>
             </div>
 
-            <div>
+            <div class="d-flex justify-content-end">
+                <a href="{{ route('password.request') }}">Esqueceu sua senha?</a>
 
             </div>
 
             @error('password')
-                <div class=" alert alert-danger d-block fade show auto-close">
+                <div class="invalid-feedback d-block fade show auto-close">
                     {{ $message }}
                 </div>
                 
             @enderror
-
          
-            <div class="form-check mb-3">
-                <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="remember"
-                    name="remember"
-                    value="1"
-                    {{ old('remember') ? 'checked' : '' }}
-                >
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="checkbox" id="remember" name="remember" value="1" {{ old('remember') ? 'checked' : '' }}>
                 <label class="form-check-label" for="remember"> Lembrar-me</label>
             </div>
-    
-
 
             <button type="submit" class="btn mt-3 w-100">Entrar</button>
         </form>

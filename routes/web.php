@@ -2,7 +2,14 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\GoogleAuthController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Notifications\CustomResetPassword;
+use Illuminate\Mail\Message;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+
 
 // auth routes - user not logged in
 Route::middleware('guest')->group(function () {
@@ -15,6 +22,14 @@ Route::middleware('guest')->group(function () {
     Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('google.login');    
     Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('google.callback');
 
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPassword'])->name('password.request');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
+    
+    Route::get('/notification-password', [CustomResetPassword::class, 'toEmail'])->name('notification.password');
+
 });
 
 // auth routes - user logged in
@@ -23,4 +38,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
+
 

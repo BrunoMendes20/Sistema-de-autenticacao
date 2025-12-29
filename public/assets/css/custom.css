@@ -2,13 +2,21 @@
     --bs-body-color:#ffffff;
 }
 
-body{
-    background-image: url(../images/bg.png);
+.bg-auth, .bg-guest {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: #fff;
 }
+
+.bg-auth{
+    background-image: url(../images/bg-auth.png);
+}
+
+.bg-guest{
+    background-image: url(../images/bg.png);
+}
+
 .card{
     background: rgba(30, 41, 59, 0.85); /* azul grafite translúcido */
     backdrop-filter: blur(10px);
@@ -43,6 +51,7 @@ body{
   background: linear-gradient(135deg, #0dcaf0, #2563eb);
   border: none;
   font-weight: 600;
+  
 }
 
 .btn:hover{

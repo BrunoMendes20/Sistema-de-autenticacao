@@ -34,7 +34,11 @@ class CustomResetPassword extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $resetLink = url('/notification-password' . $this->token . '?email=' . urlencode($notifiable->email));
+        $resetLink = route('password.reset' ,[
+            'token' => $this->token,
+            'email' => $notifiable->email
+
+        ]);
 
         return (new MailMessage)
         ->subject('Recuperação de senha')

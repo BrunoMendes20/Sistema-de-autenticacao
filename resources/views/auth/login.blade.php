@@ -1,6 +1,4 @@
-@extends('layouts.app-layout', ['pageTitle' => 'Login'])
-
-@section('content') 
+<x-layout-guest page-title="Login">
     <x-auth-card>
         <form action="{{ route('login.submit') }}" method="POST" novalidate>
             @csrf
@@ -74,6 +72,6 @@
             Não tem uma conta ? <a href="{{route('register')}}">Cadastre-se</a>
         </x-slot:footer>
     </x-auth-card>
-@endsection
+</x-layout-guest>
 
 

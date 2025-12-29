@@ -1,6 +1,4 @@
-@extends('layouts.app-layout', ['pageTitle' => 'Cadastro'])
-
-@section('content') 
+<x-layout-guest page-title="Cadastro">
     <x-auth-card>
         <form action="{{ route('register.submit') }}" method="POST" novalidate>
             @csrf
@@ -62,6 +60,6 @@
             Já tem uma conta? <a href="{{route('login')}}">Faça Login</a>
         </x-slot:footer>
     </x-auth-card>
-@endsection
+</x-layout-guest>
 
 

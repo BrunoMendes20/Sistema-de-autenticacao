@@ -5,8 +5,6 @@ use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Notifications\CustomResetPassword;
-use Illuminate\Mail\Message;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,13 +26,12 @@ Route::middleware('guest')->group(function () {
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
     Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
     
-    Route::get('/notification-password', [CustomResetPassword::class, 'toEmail'])->name('notification.password');
 
 });
 
 // auth routes - user logged in
 Route::middleware('auth')->group(function () {
-    Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [AuthController::class, 'welcome'])->name('welcome');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });

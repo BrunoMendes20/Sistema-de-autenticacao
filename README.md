@@ -1,59 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🔐 Sistema de autenticação com Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema completo de autenticação desenvolvido com **Laravel**, incluindo cadastro, login, redefinição de senha e login social com **Google OAuth**.
 
-## About Laravel
+O projeto foi construído com foco em **boas práticas**, **organização de código** e **testes automatizados**, sendo adequado tanto para uso real quanto para portfólio.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Funcionalidades
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* ✅ Cadastro de usuários
+* ✅ Login com e-mail e senha
+* ✅ Validação de dados com feedback ao usuário
+* ✅ Redefinição de senha via e-mail
+* ✅ Login com Google (OAuth)
+* ✅ Proteção de rotas com middleware `auth`
+* ✅ Layouts separados para usuários autenticados e visitantes
+* ✅ Estilização customizada para telas de autenticação
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🧪 Testes Automatizados
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+O projeto utiliza **Pest** para **testes funcionais (Feature Tests)**, cobrindo os fluxos críticos da aplicação.
 
-## Laravel Sponsors
+### Testes implementados
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+* Login com credenciais válidas
+* Login com senha inválida
+* Cadastro de usuário
+* Cadastro com e-mail duplicado
+* Reset de senha com token válido
+* Reset de senha com token inválido
+* Login com Google (OAuth mockado)
 
-### Premium Partners
+### Executar os testes
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+php artisan test
+```
 
-## Contributing
+> O login com Google é testado de forma **mockada**, sem dependência de serviços externos.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🛠️ Tecnologias Utilizadas
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* PHP
+* Laravel
+* Blade
+* MySQL
+* Bootstrap
+* Laravel Socialite
+* Pest (Testes automatizados)
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## ⚙️ Instalação e Configuração
 
-## License
+Clone o repositório:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+git clone https://github.com/BrunoMendes20/Sistema-de-autenticacao
+cd seu-repositorio
+```
+
+Instale as dependências:
+
+```bash
+composer install
+```
+
+Crie o arquivo de ambiente:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Configure o banco de dados no arquivo `.env` e execute as migrations:
+
+```bash
+php artisan migrate
+```
+
+---
+
+## 📧 Configuração de E-mail
+
+O envio de e-mails (como redefinição de senha) é configurado via SMTP.
+
+Exemplo no `.env`:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=seu-email@gmail.com
+MAIL_PASSWORD=sua-senha-de-app
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=seu-email@gmail.com
+MAIL_FROM_NAME="Laravel Auth"
+```
+
+Durante desenvolvimento ou testes, é possível usar:
+
+```env
+MAIL_MAILER=log
+```
+
+---
+
+## 🔑 Login com Google (OAuth)
+
+Para utilizar o login com Google:
+
+1. Crie um projeto no **Google Cloud Console**
+2. Gere as credenciais OAuth
+3. Configure no arquivo `.env`:
+
+```env
+Google_Client_ID=
+Google_Client_Secret=
+Google_Redirect_URI=
+```
+
+---
+
+## 📌 Decisões Técnicas
+
+* Testes focados em **comportamento**, não em detalhes de implementação
+* Integrações externas (Google OAuth) são testadas com **mock**
+* Validações críticas possuem cobertura de testes
+* Estrutura pensada para fácil manutenção e evolução
+
+---
+
+## 📄 Licença
+
+Este projeto é open-source e foi desenvolvido para fins educacionais e de estudo.

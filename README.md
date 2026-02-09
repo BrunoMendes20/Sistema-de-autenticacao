@@ -61,7 +61,7 @@ Clone o repositório:
 
 ```bash
 git clone https://github.com/BrunoMendes20/Sistema-de-autenticacao
-cd seu-repositorio
+cd Sistema de autenticacao
 ```
 
 Instale as dependências:
